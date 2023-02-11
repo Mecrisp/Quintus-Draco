@@ -1,0 +1,12 @@
+#!/bin/sh
+
+riscv64-linux-gnu-as quintus-draco.s -o quintus-draco.o -march=rv32im
+riscv64-linux-gnu-ld -o quintus-draco.elf -T memmap quintus-draco.o -m elf32lriscv
+riscv64-linux-gnu-objdump -Mnumeric -D quintus-draco.elf > quintus-draco.list
+riscv64-linux-gnu-objcopy quintus-draco.elf quintus-draco.bin -O binary
+
+rm -f quintus-draco.o
+rm -f quintus-draco.elf
+
+md5sum *.bin
+ls -l *.bin

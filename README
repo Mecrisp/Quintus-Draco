@@ -1,0 +1,71 @@
+
+--------------------------------------------------------------------------------
+  Quintus Draco
+  Lovebyte 2023
+  Mecrisp
+
+  Matthias Koch
+  m-atthias@users.sf.net
+  http://mecrisp.sourceforge.net/
+--------------------------------------------------------------------------------
+
+A moving dragon fractal running in 56 bytes on a RISC-V microcontroller,
+using two DAC channels for vector graphics on an analog oscilloscope.
+
+Quintus Draco is designed for GD32VF103 microcontrollers and
+draws vector graphics on an analog oscilloscope in XY mode
+connected to
+
+   GND and the two DAC channels on pins
+   PA4 (vertical) and
+   PA5 (horizontal).
+
+--------------------------------------------------------------------------------
+  Design ideas:
+--------------------------------------------------------------------------------
+
+This is a RISC-V port of Draakje 15b, released during Lovebyte 2022.
+
+It draws a dragon fractal, moves the viewport every time the x coordinate
+hits zero and may serve as example framework for vector graphics on GD32VF103.
+
+The algorithm is included as dragon.c for further experiments. Quality
+of the randomness determines how dense the dragon is drawn, the size
+can be controlled by changing the shift amount.
+
+--------------------------------------------------------------------------------
+  How to run:
+--------------------------------------------------------------------------------
+
+If you have connected your
+
+Longan Nano board to
+             a USB-serial cable with 3.3V logic levels
+
+3V3 or 5V -- VCC (measure the voltage present here)
+R0        -- TXD
+T0        -- RXD
+GND       -- GND
+
+you can flash it if you first
+
+* Press and hold BOOT0 button
+* Press and release Reset button
+* Release BOOT0 button
+
+and then execute
+
+stm32loader -e -w -v -p /dev/ttyUSB0 quintus-draco.bin
+
+on your host machine.
+
+Press and release Reset button to start demo.
+
+--------------------------------------------------------------------------------
+  Credits:
+--------------------------------------------------------------------------------
+
+* Inspiration:
+
+  Draakje 15b by HellMood/Desire, Lovebyte 2022
+  https://www.pouet.net/prod.php?which=91104

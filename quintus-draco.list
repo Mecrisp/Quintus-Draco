@@ -1,0 +1,31 @@
+
+quintus-draco.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <Reset>:
+   0:	40021737          	lui	x14,0x40021
+   4:	400071b7          	lui	x3,0x40007
+   8:	547d                	li	x8,-1
+   a:	cf40                	sw	x8,28(x14)
+   c:	67c1                	lui	x15,0x10
+   e:	0785                	addi	x15,x15,1
+  10:	40f1a023          	sw	x15,1024(x3) # 40007400 <DAC_BASE+0x400>
+
+00000014 <mainloop>:
+  14:	e311                	bnez	x14,18 <mainloop+0x4>
+  16:	0425                	addi	x8,x8,9
+  18:	816d                	srli	x10,x10,0x1b
+  1a:	973e                	add	x14,x14,x15
+  1c:	972a                	add	x14,x14,x10
+  1e:	00177513          	andi	x10,x14,1
+  22:	052e                	slli	x10,x10,0xb
+  24:	97aa                	add	x15,x15,x10
+  26:	8705                	srai	x14,x14,0x1
+  28:	8f99                	sub	x15,x15,x14
+  2a:	01079513          	slli	x10,x15,0x10
+  2e:	953a                	add	x10,x10,x14
+  30:	9522                	add	x10,x10,x8
+  32:	42a1a023          	sw	x10,1056(x3)
+  36:	bff9                	j	14 <mainloop>
